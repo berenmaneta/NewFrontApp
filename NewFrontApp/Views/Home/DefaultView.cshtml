@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        Carregar();
+
+        $("#botao").click(function () {
+            debugger;
+            Pesquisar();
+        });
+
+        $("#limpar").click(function () {
+            debugger;
+            document.getElementById("pesquisa").value = '';
+            Carregar();
+        });
+
+
+    });
+
+     function Pesquisar() {
+        debugger;
+        $.ajax({
+            url: '@Url.Action("GetProductsAPIById", "Home")',
+            type: "GET",
+            contentType: "application/jon",
+            data: { "data": $("#pesquisa").val() },
+                success: function (result) {
+                    debugger;
+                    LimpaTabela();
+                    PreencherTable(result);
+                },
+                error: function (xhr, exception) {
+                    alert("ERRO!");
+                }
+            });
+    }
+
+       function Carregar() {
+        $.ajax({
+                url: '@Url.Action("GetProductBySubCategory", "Home")',
+                type: "GET",
+                contentType: "application/jon",
+                data: { "id": @ViewBag.IdSubCategory },
+                success: function (result) {
+                    debugger;
+                    LimpaTabela();
+                    PreencherTable(result);
+                },
+                error: function (xhr, exception) {
+                    alert("ERRO!");
+                }
+            });
+    }
+
+    function PreencherTable(data) {
+        debugger;
+        var i;
+        for (i = 0; i < data.length; i++) {
+            var section = document.getElementById("secao");
+            var div = document.createElement('div');
+            div.innerHTML = data[i].Name + ' - R$ ' + data[i].Price + '<br>';
+            div.className = 'mostraProduto';
+            div.addEventListener("click", function () { debugger; var teste = this.dataset.Id; window.location.href = '@Url.Action("Details", "Home" , new {id = "ID"})'.replace("ID", teste); });
+            div.dataset.Id = data[i].Id;
+            var image = document.createElement('img');
+            image.className = 'imagem-produto';
+            image.src = '@Url.Action("RetrieveProductImage", "Home" , new {id = "id"})'.replace("id", data[i].Id);
+            div.appendChild(image);
+            section.appendChild(div);
+        }
+
+        function Teste() {
+            alert("test");
+        }
+    }
+
+    function LimpaTabela() {
+        var section = document.getElementById("secao");
+        section.querySelectorAll('*').forEach(n => n.remove());
+    }
+
+
+
+</script>
+<div class="incial">
+    <div class="pesquisa">
+        <label>Pesquisar: </label>
+        <input id="pesquisa">
+        <button type="button" id="botao">Pesquisar</button>
+        <button type="button" id="limpar">Limpar</button>
+    </div>
+
+    <section id="secao" class="secao">
+    </section>
+</div>

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="navbar">
+        @Html.ActionLink("Home", "Index", "Home")
+        <div class="subnav">
+            <button class="subnavbtn">Home appliances <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                @Html.ActionLink("Fridges", "Fridges", "HomeAppliance")
+                @Html.ActionLink("Air conditioners", "AirConditioner", "HomeAppliance")
+                @Html.ActionLink("Microwaves", "Microwaves", "HomeAppliance")
+                @Html.ActionLink("Wahers", "Washers", "HomeAppliance")
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">Computing <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                @Html.ActionLink("Computers", "Computers", "Computing")
+                @Html.ActionLink("Printers", "Printers", "Computing")
+                @Html.ActionLink("External HD", "ExternalHD", "Computing")
+                @Html.ActionLink("Monitors", "Monitors", "Computing")
+                @Html.ActionLink("Notebooks", "Notebooks", "Computing")
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">Cell Phones <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                @Html.ActionLink("Samsung", "Samsung", "CellPhones")
+                @Html.ActionLink("Apple", "Apple", "CellPhones")
+                @Html.ActionLink("Motorola", "Motorola", "CellPhones")
+                @Html.ActionLink("LG", "LG", "CellPhones")
+                @Html.ActionLink("Accessories", "Accessories", "CellPhones")
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">TV & Video <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                @Html.ActionLink("Smart TV", "SmartTV", "TVAndVideo")
+                @Html.ActionLink("Monitor TV", "MonitorTV", "TVAndVideo")
+                @Html.ActionLink("Projectors", "Projectors", "TVAndVideo")
+                @Html.ActionLink("Soundbar", "Soundbar", "TVAndVideo")
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn">Furniture <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                @Html.ActionLink("Couches", "Couches", "Furniture")
+                @Html.ActionLink("Wardrobes", "Wardrobes", "Furniture")
+                @Html.ActionLink("Mattress", "Mattress", "Furniture")
+                @Html.ActionLink("Diner tables", "DinerTables", "Furniture")
+                @Html.ActionLink("TV Panels", "TVPanels", "Furniture")
+            </div>
+        </div>
+        @Html.ActionLink("My Cart", "Cart", "MyCart")
+        @Html.ActionLink("Admin", "Login", "Admin")
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

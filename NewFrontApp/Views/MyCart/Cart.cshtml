@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+
+<script>
+    $(document).ready(function () {
+        Carregar();
+
+    });
+
+    function Carregar() {
+        $.ajax({
+                url: '@Url.Action("GetProductsCart", "MyCart")',
+                type: "GET",
+                contentType: "application/jon",
+                success: function (result) {
+                    debugger;
+                    PreencherTable(result);
+                },
+                error: function (xhr, exception) {
+                    alert("Cart is empty!!");
+                }
+            });
+    }
+
+    function PreencherTable(data) {
+        debugger;
+        $('#thetable tr').not(':first').not(':last').remove();
+        var html = '';
+        for (var i = 0; i < data.length; i++)
+            html += '<tr><td>' + data[i].Name + '</td><td>' + data[i].Price + '</td><td>' + data[i].Quantity + '</td><td> R$ ' + data[i].Total + '</td><td></td></tr>'
+        $('#thetable tr').first().after(html);
+    }
+
+
+
+</script>
+
+<div>
+    <section class="tile">
+
+        <div class="tile-header dvd dvd-btm">
+            <h1 class="custom-font"><strong>My kart</strong></h1>
+        </div>
+
+        <div class="tile-body p-0">
+
+            <table id="thetable" class="table">
+                <thead>
+                    <tr>    
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+
+        </div>
+        <button>Check out</button>
+
+    </section>
+</div>
